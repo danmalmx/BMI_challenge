@@ -2,19 +2,38 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
+    <link href="index.css" rel="stylesheet" type="text/css" />
     <title>BMI_Calculator</title>
     <script src="js/person.js"></script>
     <script src="js/calculator.js"></script>
 </head>
 
 <body>
-<form id="calculate">
+<div class="mui-container">
+    <h1>Body Mass Index Calculator</h1>
+        <br>
+    <!--<form id="calculate">
     <div id="metric-inputs">
         <input type="text" id="weight-in-kgs" placeholder="Weight">
         <input type="text" id="height-in-cm" placeholder="Height">
-    </div>
+    </div>-->
 
-    <button type="submit" value="Calculate">Calculate</button>
+    <form class="mui-form" id="calculate">
+            <div class="mui-textfield">
+              <input type="text" id="weight-in-kgs" placeholder="Weight">
+            </div>
+            <div class="mui-textfield">
+              <input type="text" id="height-in-cm" placeholder="Height">
+            </div>
+            <div>
+            <button type="submit" class="mui-btn mui-btn--primary" value="Calculate">Calculate</button>
+          </form>
+
+    <!--<button type="submit" value="Calculate">Calculate</button>-->
 </form>
 
     <div>
@@ -29,7 +48,7 @@
         global.displayValueElement = document.querySelector("#display_value");
         global.displayMessageElement = document.querySelector("#display_message");
 
-        document.addEventListener("DOMcontentLoaded", => {
+        document.addEventListener("DOMContentLoaded", () => {
             global.calculateForm.addEventListener("submit", event => {
                 event.preventDefault();
                 calculateBMI()
@@ -51,10 +70,10 @@ const calculateBMI = () => {
         });
         person.calculate_bmi();
         resolve(person);
-    })
+    })x
 };
     </script>
-    
+ </div>   
 </body>
 
 </html>
