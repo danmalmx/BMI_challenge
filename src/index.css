@@ -1,3 +1,8 @@
 h1 {
     color: #3364FF;
 }
+#message {
+    font-size: medium;
+    inline-size: 500px;
+    padding: 0px 5px 0px 5px;
+}

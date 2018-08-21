@@ -13,67 +13,119 @@
 </head>
 
 <body>
+
 <div class="mui-container">
     <h1>Body Mass Index Calculator</h1>
         <br>
-    <!--<form id="calculate">
-    <div id="metric-inputs">
-        <input type="text" id="weight-in-kgs" placeholder="Weight">
-        <input type="text" id="height-in-cm" placeholder="Height">
-    </div>-->
 
-    <form class="mui-form" id="calculate">
+        <!--form>
+            <div class="form-group-row">
+                <div class="col-auto">
+                        <div class="mui-radio" id="my_select"> 
+                        <label>
+                        <input type="radio"
+                                name="optionsRadios"
+                                id="radio-metric"
+                                value="metric"
+                                checked>
+                        Metric
+                        </label>
+                        <label>
+                            <input type="radio"
+                                name="optionsRadios"
+                                id="radio-imperial"
+                                value="imperial"
+                                unchecked>
+                            Imperial
+                        </label>
+                        </div>
+        </form-->
+        <div class="form-group-row">
+            <div class="col-auto">
+                <select id="my_select">
+                    <option value="metric">Metric</option>
+                    <option value="imperial">Imperial</option>
+            </select>
+            </div>
+        </div>
+    
+        <h3>Metric Calculator</h3>
+        <form class="mui-form" id="calculate">
             <div class="mui-textfield">
-              <input type="text" id="weight-in-kgs" placeholder="Weight">
+              <input type="text" id="weight-in-kgs" placeholder="Weight in Kilos">
             </div>
             <div class="mui-textfield">
-              <input type="text" id="height-in-cm" placeholder="Height">
+              <input type="text" id="height-in-cm" placeholder="Height in Centimeters">
             </div>
-            <div>
-            <button type="submit" class="mui-btn mui-btn--primary" value="Calculate">Calculate</button>
-          </form>
 
-    <!--<button type="submit" value="Calculate">Calculate</button>-->
+
+    </form>
+
+    <h3>Imperial Calculator</h3>
+    <form class="mui-form" id="calculate_imperial">
+        <div class="mui-textfield">
+          <input type="text" id="weight-in-lbs" placeholder="Weight in Pounds">
+        </div>
+        <div class="mui-textfield">
+          <input type="text" id="height-in-in" placeholder="Height in inches">
+        </div>
+        <div>
+        <button class="mui-btn mui-btn--primary mui--z2" type="submit" value="Calculate">Calculate</button>
+        </div>
 </form>
 
-    <div>
+    <hr>    
+
+    <div id="message">
         <span id="display_value"></span>
         <span id="display_message"></span>
     </div>
-    <script type="text/javascript">
+   
+  
+
+ <script type="text/javascript">
 
     const global = {}
         
         global.calculateForm = document.querySelector("#calculate");
         global.displayValueElement = document.querySelector("#display_value");
         global.displayMessageElement = document.querySelector("#display_message");
+        global.methodSelector = document.querySelector("#my_select");
+
+
 
         document.addEventListener("DOMContentLoaded", () => {
             global.calculateForm.addEventListener("submit", event => {
                 event.preventDefault();
                 calculateBMI()
-                .then(person => {
-                    global.displayValueElement.innerHTML = "Your BMI is " + person.bmiValue;
-                    global.displayMessageElement.innerHTML = "and you are " + person.bmiMessage;
+                    .then(person => {
+                        global.displayValueElement.innerHTML = "Your BMI is " + person.bmiValue;
+                        global.displayMessageElement.innerHTML = "and you are " + person.bmiMessage;
+
                 })
             })
     });
 
 const calculateBMI = () => {
+        let method = global.methodSelector.option[global.methodSelector.selectedIndex].value;   
     return new Promise(resolve => {
-        let w = parseFloat(document.getElementById("weight-in-kgs").value);
-        let h = parseFloat(document.getElementById("height-in-cm").value);
+        let weightFormat = method === "metric" ? "weight-in-kgs" : "weight-in-lbs";
+        let heightFormat = method === "metric" ? "height-in-cm" : "height-in-in";
 
-        let person = Person ({
+        let w = parseFloat(document.getElementById(weightFormat).value);
+        let h = parseFloat(document.getElementById(heightFormat).value);
+
+        let person = new Person ({
             weight: w, 
             height: h, 
         });
-        person.calculate_bmi();
+
+        method === "metric" ? person.calculate_metric_bmi() : person.calculate_imperial_bmi();
         resolve(person);
     })
 };
-    </script>
- </div>   
+</script>
+</div>  
 </body>
 
 </html>
