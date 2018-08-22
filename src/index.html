@@ -16,71 +16,71 @@
 
 <div class="mui-container">
     <h1>Body Mass Index Calculator</h1>
-        <br>
+        <br>        
+      
+<!-- <div id="my_select">
+<input type="radio" onchange="hideB(this)" name="aorb" checked> Metric 
+<input type="radio" onchange="hideA(this)" name="aorb" unchecked> Imperial
+</div>
+<br> -->
 
-        <!--form>
-            <div class="form-group-row">
-                <div class="col-auto">
-                        <div class="mui-radio" id="my_select"> 
-                        <label>
-                        <input type="radio"
-                                name="optionsRadios"
-                                id="radio-metric"
-                                value="metric"
-                                checked>
-                        Metric
-                        </label>
-                        <label>
-                            <input type="radio"
-                                name="optionsRadios"
-                                id="radio-imperial"
-                                value="imperial"
-                                unchecked>
-                            Imperial
-                        </label>
-                        </div>
-        </form-->
-        <div class="form-group-row">
-            <div class="col-auto">
-                <select id="my_select">
-                    <option value="metric">Metric</option>
-                    <option value="imperial">Imperial</option>
+    <div class="form-group-row">
+        <div clas="col-auto">
+            <select class="form-control"id="my_select">
+                <option value="metric">Metric System</option>
+                <option value="imperial">Imperial System</option>
             </select>
-            </div>
         </div>
+    </div>
+        
+        <form id="calculate">
+            <div id="metric_input"> 
+            <form class="mui-form">
+            <div class="mui-textfield">
+            <input type="text" id="weight-in-kgs" placeholder="Weight in Kilograms">
+            </div>
+            <div class="mui-textfield">
+            <input type="text" id="height-in-cm" placeholder="Height in Centimeters">
+            </div>
+            </form>
+            </div>
     
-        <h3>Metric Calculator</h3>
-        <form class="mui-form" id="calculate">
+            <div id="imperial_input" style="visibility: hidden">     
+            <form class="mui-form">
             <div class="mui-textfield">
-              <input type="text" id="weight-in-kgs" placeholder="Weight in Kilos">
+            <input type="text" id="weight-in-lbs" placeholder="Weight in Pounds">
             </div>
             <div class="mui-textfield">
-              <input type="text" id="height-in-cm" placeholder="Height in Centimeters">
+            <input type="text" id="height-in-in" placeholder="Height in Inches">
             </div>
-
-
-    </form>
-
-    <h3>Imperial Calculator</h3>
-    <form class="mui-form" id="calculate_imperial">
-        <div class="mui-textfield">
-          <input type="text" id="weight-in-lbs" placeholder="Weight in Pounds">
-        </div>
-        <div class="mui-textfield">
-          <input type="text" id="height-in-in" placeholder="Height in inches">
-        </div>
+            </form>
+            </div>
+        </form>
+  <!-- <script> 
+  function hideA(x) {
+        if (x.checked) {
+          document.getElementById("metric_input").style.visibility = "hidden";
+          document.getElementById("imperial_input").style.visibility = "visible";
+        }
+      }
+     
+      function hideB(x) {
+        if (x.checked) {
+          document.getElementById("imperial_input").style.visibility = "hidden";
+          document.getElementById("metric_input").style.visibility = "visible";
+        }
+      }
+      </script-->
         <div>
-        <button class="mui-btn mui-btn--primary mui--z2" type="submit" value="Calculate">Calculate</button>
+            <button class="mui-btn mui-btn--primary mui--z2" type="submit" value="Calculate">Calculate</button>
         </div>
-</form>
-
-    <hr>    
+<hr>    
 
     <div id="message">
         <span id="display_value"></span>
         <span id="display_message"></span>
     </div>
-   
+</div>
   
 
  <script type="text/javascript">
@@ -93,21 +93,22 @@
         global.methodSelector = document.querySelector("#my_select");
 
 
-
         document.addEventListener("DOMContentLoaded", () => {
             global.calculateForm.addEventListener("submit", event => {
                 event.preventDefault();
-                calculateBMI()
+                
+                    calculateBMI()
                     .then(person => {
                         global.displayValueElement.innerHTML = "Your BMI is " + person.bmiValue;
                         global.displayMessageElement.innerHTML = "and you are " + person.bmiMessage;
 
                 })
-            })
+            })      
     });
 
 const calculateBMI = () => {
-        let method = global.methodSelector.option[global.methodSelector.selectedIndex].value;   
+        let method = global.methodSelector.options[global.methodSelector.selectedIndex].value;   
+
     return new Promise(resolve => {
         let weightFormat = method === "metric" ? "weight-in-kgs" : "weight-in-lbs";
         let heightFormat = method === "metric" ? "height-in-cm" : "height-in-in";
@@ -120,6 +121,7 @@ const calculateBMI = () => {
             height: h, 
         });
 
+        // person.calculate_bmi();
         method === "metric" ? person.calculate_metric_bmi() : person.calculate_imperial_bmi();
         resolve(person);
     })

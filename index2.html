@@ -1,0 +1,27 @@
+ 
+<input type="radio" onchange="hideB(this)" name="aorb" checked> Metric 
+<input type="radio" onchange="hideA(this)" name="aorb" unchecked> Imperial
+<hr>
+    <form class="mui-form">
+            <input type="text" id="weight-in-kgs" placeholder="Weight in Kilos" name="metric_input">
+            <input type="text" id="height-in-cm" placeholder="Height in Centimeters" name="metric_input">
+            <input type="text" id="weight-in-lbs" placeholder="Weight in Pound" name="imperial_input" style="visibility: hidden">
+            <input type="text" id="height-in-in" placeholder="Height in Inches" name="imperial_input" style="visibility: hidden">
+        </div>
+    </form>
+
+  <script> 
+  function hideA(x) {
+        if (x.checked) {
+          document.getElementsByName("metric_input").style.visibility = "hidden";
+          document.getElementsByName("imperial_input").style.visibility = "visible";
+        }
+      }
+     
+      function hideB(x) {
+        if (x.checked) {
+          document.getElementsByName("imperial_input").style.visibility = "hidden";
+          document.getElementsByName("metric_input").style.visibility = "visible";
+        }
+      }
+      </script>
