@@ -12,78 +12,56 @@
 </head>
 
 <body>
-<!-- 
+
 <div class="mui-container">
     <h1>Body Mass Index Calculator</h1>
         <br>        
-       -->
-<!-- <div class="form-group-row">
-    <div class="form-control" id="my_select">
-        <input type="radio" onchange="hideB(this)" value="metric "name="aorb" checked> Metric 
-        <input type="radio" onchange="hideA(this)" value="imperial" name="aorb" unchecked> Imperial
-    </div> -->
 
-    <div class="form-group-row">
+<div class="form-group-row">
+    <div clas="col-auto">
+        <div class="form-control" id="my_select">
+            <input type="radio" value="metric" id="metricYes" onchange="hideB(this)" name="aorb" checked> Metric 
+            <input type="radio" value="imperial" id="imperialYes" onchange="hideA(this)" name="aorb"> Imperial
+        </div>
+
+    <!-- <div class="form-group-row">
         <div clas="col-auto">
             <select class="form-control" id="my_select">
                 <option value="metric">Metric System</option>
                 <option value="imperial">Imperial System</option>
             </select>
         </div>
-    </div>
+    </div> -->
 
-    <form id="calculate">
-        <div id="metric-inputs">
+    <form id="calculate" class="mui-form">
+        <div id="metric_input"> 
+            <div class="mui-textfield">
             <input type="text" id="weight-in-kgs" placeholder="Weight">
+            </div>
+            <div class="mui-textfield">
             <input type="text" id="height-in-cm" placeholder="Height">
+            </div>
         </div>
 
-        <div id="imperial-inputs">
+        <div id="imperial_input"> 
+            <div class="mui-textfield">
             <input type="text" id="weight-in-lbs" placeholder="Weight">
+                </div>
+            <div class="mui-textfield">
             <input type="text" id="height-in-in" placeholder="Height">
+            </div>
         </div>
 
-        <button type="submit" value="Calculate"> Calculate </button>
+        <button class="mui-btn mui-btn--primary" type="submit" value="Calculate"> Calculate </button>
     </form>
 
-    <div>
+    <div id="message">
         <span id="display_value"></span>
         <span id="display_message"></span>
     </div>
-        
-        <!-- <div id="metric_input"> 
-            <form class="mui-form">
-            <div class="mui-textfield">
-            <input type="text" id="weight-in-kgs" placeholder="Weight in Kilograms">
-            </div>
-            <div class="mui-textfield">
-            <input type="text" id="height-in-cm" placeholder="Height in Centimeters">
-            </div>
-            </form>
-        </div> -->
-    
-            <!-- <div id="imperial_input">     
-            <form class="mui-form">
-            <div class="mui-textfield">
-            <input type="text" id="weight-in-lbs" placeholder="Weight in Pounds">
-            </div>
-            <div class="mui-textfield">
-            <input type="text" id="height-in-in" placeholder="Height in Inches">
-            </div>
-            </form>
-            </div> -->
+
  
-            <!-- <div>
-                <button class="mui-btn mui-btn--primary mui--z2" type="submit" value="Calculate">Calculate</button>
-            </div>
-    <hr>    -->
-
-    <!-- <div id="message">
-            <span id="display_value"></span>
-            <span id="display_message"></span>
-    </div> -->
-
- <!-- <script> 
+    <!-- <script> 
   function hideA(x) {
         if (x.checked) {
           document.getElementById("metric_input").style.visibility = "hidden";
@@ -101,15 +79,15 @@
 
 </div>
 
- <script type="text/javascript">
+<script type="text/javascript">
 
     const global = {}
         
         global.calculateForm = document.querySelector("#calculate");
         global.displayValueElement = document.querySelector("#display_value");
         global.displayMessageElement = document.querySelector("#display_message");
-        global.methodSelector = document.querySelector("#my_select");
-
+        //global.methodSelector = document.querySelector("#my_select");
+        global.methodSelector = document.getElementById('#metric-inputs');
 
         document.addEventListener("DOMContentLoaded", () => {
             global.calculateForm.addEventListener("submit", event => {
