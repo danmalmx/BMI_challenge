@@ -2,22 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="//cdn.muicss.com/mui-0.9.39/css/mui.min.css" rel="stylesheet" type="text/css">
     <script src="//cdn.muicss.com/mui-0.9.39/js/mui.min.js"></script>
-    <link href="index.css" rel="stylesheet" type="text/css" />
-    <title>BMI_Calculator</title>
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <title>BMI_Calculator</title>   
     <script src="js/person.js"></script>
     <script src="js/calculator.js"></script>
 </head>
 
 <body>
-
+<!-- 
 <div class="mui-container">
     <h1>Body Mass Index Calculator</h1>
         <br>        
-      
+       -->
 <!-- <div class="form-group-row">
     <div class="form-control" id="my_select">
         <input type="radio" onchange="hideB(this)" value="metric "name="aorb" checked> Metric 
@@ -32,9 +31,27 @@
             </select>
         </div>
     </div>
+
+    <form id="calculate">
+        <div id="metric-inputs">
+            <input type="text" id="weight-in-kgs" placeholder="Weight">
+            <input type="text" id="height-in-cm" placeholder="Height">
+        </div>
+
+        <div id="imperial-inputs">
+            <input type="text" id="weight-in-lbs" placeholder="Weight">
+            <input type="text" id="height-in-in" placeholder="Height">
+        </div>
+
+        <button type="submit" value="Calculate"> Calculate </button>
+    </form>
+
+    <div>
+        <span id="display_value"></span>
+        <span id="display_message"></span>
+    </div>
         
-        <form id="calculate">
-            <div id="metric_input"> 
+        <!-- <div id="metric_input"> 
             <form class="mui-form">
             <div class="mui-textfield">
             <input type="text" id="weight-in-kgs" placeholder="Weight in Kilograms">
@@ -43,9 +60,9 @@
             <input type="text" id="height-in-cm" placeholder="Height in Centimeters">
             </div>
             </form>
-            </div>
+        </div> -->
     
-            <div id="imperial_input">     
+            <!-- <div id="imperial_input">     
             <form class="mui-form">
             <div class="mui-textfield">
             <input type="text" id="weight-in-lbs" placeholder="Weight in Pounds">
@@ -54,14 +71,17 @@
             <input type="text" id="height-in-in" placeholder="Height in Inches">
             </div>
             </form>
-            </div>
-        </form>
+            </div> -->
  
-            <div>
+            <!-- <div>
                 <button class="mui-btn mui-btn--primary mui--z2" type="submit" value="Calculate">Calculate</button>
             </div>
-    <hr>   
-</div>
+    <hr>    -->
+
+    <!-- <div id="message">
+            <span id="display_value"></span>
+            <span id="display_message"></span>
+    </div> -->
 
  <!-- <script> 
   function hideA(x) {
@@ -78,14 +98,8 @@
         }
       };
     </script> -->
- 
 
-    <div id="message">
-        <span id="display_value"></span>
-        <span id="display_message"></span>
-    </div>
 </div>
-  
 
  <script type="text/javascript">
 
@@ -101,10 +115,10 @@
             global.calculateForm.addEventListener("submit", event => {
                 event.preventDefault();
                 
-                    calculateBMI()
+                calculateBMI()
                     .then(person => {
-                        global.displayValueElement.innerHTML = "Your BMI is " + person.bmiValue;
-                        global.displayMessageElement.innerHTML = "and you are " + person.bmiMessage;
+                        global.displayValueElement.innerHTML = `Your BMI is ${person.bmiValue}`;
+                        global.displayMessageElement.innerHTML = `and you are ${person.bmiMessage}`;
 
                 })
             })      
@@ -113,7 +127,7 @@
 const calculateBMI = () => {
         let method = global.methodSelector.options[global.methodSelector.selectedIndex].value;   
 
-    return new Promise(resolve => {
+    return new Promise(resolve =>   {
         let weightFormat = method === "metric" ? "weight-in-kgs" : "weight-in-lbs";
         let heightFormat = method === "metric" ? "height-in-cm" : "height-in-in";
 
@@ -121,7 +135,7 @@ const calculateBMI = () => {
         let h = parseFloat(document.getElementById(heightFormat).value);
 
         let person = new Person ({
-            weight: w, 
+            weight: w,      
             height: h, 
         });
 
@@ -131,7 +145,5 @@ const calculateBMI = () => {
 };
 
 </script>
-</div>  
-</body>
-
-</html>
+</body>         
+</html>     

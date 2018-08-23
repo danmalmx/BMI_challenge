@@ -20,6 +20,7 @@ BMICalculator.prototype.imperial_bmi = function(obj) {
         setBMIMessage(obj);
     }
 };
+
 function setBMIMessage (obj) {
     if (obj.bmiValue < 18.5) {
         obj.bmiMessage = "Underweight"
@@ -33,4 +34,4 @@ function setBMIMessage (obj) {
     if (obj.bmiValue > 30) {
         obj.bmiMessage = "Obese"
     }
-}
+};
