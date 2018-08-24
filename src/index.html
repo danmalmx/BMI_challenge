@@ -20,9 +20,10 @@
 <!-- <div class="form-group-row">
     <div clas="col-auto">
         <div class="form-control" id="my_select">
-            <input type="radio" value="metric" id="metric" onchange="hideB(this)" name="aorb" checked> Metric 
-            <input type="radio" value="metric" id="imperial" onchange="hideA(this)" name="aorb"> Imperial
+            <input type="radio" value="metric" id="metric" name="aorb" checked> Metric 
+            <input type="radio" value="imperial" id="imperial" name="aorb"> Imperial
         </div> -->
+
 
     <div class="form-group-row">
         <div clas="col-auto">
@@ -36,24 +37,25 @@
     <form id="calculate" class="mui-form">
         <div id="metric_input"> 
             <div class="mui-textfield">
-            <input type="text" id="weight-in-kgs" placeholder="Weight">
+            <input type="text" id="weight-in-kgs" placeholder="Weight in kilograms">
             </div>
             <div class="mui-textfield">
-            <input type="text" id="height-in-cm" placeholder="Height">
+            <input type="text" id="height-in-cm" placeholder="Height in centimeters">
             </div>
         </div>
 
         <div id="imperial_input"> 
             <div class="mui-textfield">
-            <input type="text" id="weight-in-lbs" placeholder="Weight">
+            <input type="text" id="weight-in-lbs" placeholder="Weight in pounds">
                 </div>
             <div class="mui-textfield">
-            <input type="text" id="height-in-in" placeholder="Height">
+            <input type="text" id="height-in-in" placeholder="Height in inches">
             </div>
         </div>
 
         <button class="mui-btn mui-btn--primary" type="submit" value="Calculate"> Calculate </button>
     </form>
+
 
     <div id="message">
         <span id="display_value"></span>
@@ -87,6 +89,22 @@
         //global.methodSelector = document.getElementById('#my_select');
 
         document.addEventListener("DOMContentLoaded", () => {
+            var imperialInputElements = document.getElementById("imperial_input");
+            var metricInputElements = document.getElementById("metric_input");
+
+            imperialInputElements.style.display = "none";
+            global.methodSelector.addEventListener("change", function() {
+                if (global.methodSelector.options[global.methodSelector.selectedIndex].value === "metric") {
+                    imperialInputElements.style.display = "none";
+                    metricInputElements.style.display = "";
+
+                }   else {
+                    imperialInputElements.style.display = "";
+                    metricInputElements.style.display = "none";
+
+                }
+            }); 
+
             global.calculateForm.addEventListener("submit", event => {
                 event.preventDefault();
                 

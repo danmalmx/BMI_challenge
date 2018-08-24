@@ -45,7 +45,7 @@ describe("User can calculate BMI using the imperial method", () => {
 
     it("by inputing his weight and height", async () => {
         await browser.selectOption("select[id='my_select']", {option: "imperial"});
-        //await browser.clickOnButton("imperial")
+        // await browser.clickOnButton("metric-inputs")
         await browser.fillIn("input[id='weight-in-lbs']", {with: "170"});
         await browser.fillIn("input[id='height-in-in']", {with: "70"}); 
 
